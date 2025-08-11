@@ -16,7 +16,7 @@ NC='\e[0m'
 # REPO
 REPO="https://raw.githubusercontent.com/xyoruz/X/main/"
 
-# --- FUNGSI PEMBANTU ---
+# --- FUNGSI PEMBANT ---
 function print_ok() {
     echo -e "${OK} ${BLUE} $1 ${FONT}"
 }
