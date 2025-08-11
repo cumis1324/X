@@ -396,8 +396,8 @@ EOF
 function send_telegram_notif() {
     # PERINGATAN: Menyimpan API Key di skrip publik sangat tidak aman!
     # Sebaiknya gunakan variabel lingkungan atau metode lain yang lebih aman.
-    CHATID="1002598300"
-    KEY="6040072616:AAE9c3kp8MLUKiA2Q_CWeXzT6SrLhRz0Mg4"
+    CHATID="6777318112"
+    KEY="7436116320:AAELRG0rwO-OFLeUjD2vxsoZ-Ti4TcVfuPQ"
     URL="https://api.telegram.org/bot$KEY/sendMessage"
     
     MYIP=$(curl -sS ipv4.icanhazip.com)
@@ -487,3 +487,29 @@ function final_cleanup_and_summary() {
         reboot
     fi
 }
+
+# --- ALUR EKSEKUSI SKRIP ---
+start=$(date +%s)
+
+# Instalasi utama
+initial_check
+first_setup
+base_package
+make_folder_xray
+pasang_domain
+pasang_ssl
+install_xray
+ssh_setup
+ins_dropbear
+ins_openvpn
+ins_vnstat
+ins_swab
+ins_epro
+install_menu
+setup_profile_cron
+# Skrip lain yang mungkin ada (udp_mini, noobzvpn, etc.) bisa ditambahkan di sini jika diperlukan
+
+# Finalisasi
+restart_all_services
+send_telegram_notif
+final_cleanup_and_summary
