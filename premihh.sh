@@ -198,9 +198,23 @@ function pasang_ssl() {
     
     systemctl stop nginx
     
-    # Gunakan acme.sh untuk SSL
+    # Hapus instalasi acme.sh sebelumnya jika ada
     rm -rf /root/.acme.sh
+    
+    # 1. BUAT DIREKTORI TERLEBIH DAHULU
+    mkdir -p /root/.acme.sh
+    
+    # 2. UNDUH SCRIPT acme.sh
     curl -sL https://acme-install.netlify.app/acme.sh -o /root/.acme.sh/acme.sh
+    
+    # 3. TAMBAHKAN PENGECEKAN APAKAH FILE BERHASIL DIUNDUH
+    if [ ! -f /root/.acme.sh/acme.sh ]; then
+        print_error "Gagal mengunduh acme.sh. Periksa koneksi internet atau URL sumber."
+        systemctl start nginx
+        exit 1
+    fi
+
+    # Lanjutkan proses instalasi SSL
     chmod +x /root/.acme.sh/acme.sh
     /root/.acme.sh/acme.sh --upgrade --auto-upgrade
     /root/.acme.sh/acme.sh --set-default-ca --server letsencrypt
